@@ -27,6 +27,14 @@
     <repository>
       <include>true</include>
       <metadata>
+        <id>rhba-repository</id>
+        <url>file:///home/donato/Downloads/RH/pam/maven/maven-repository</url>
+        <source>PROJECT</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
         <id>central</id>
         <url>https://repo.maven.apache.org/maven2</url>
         <source>PROJECT</source>
