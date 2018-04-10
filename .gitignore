@@ -1,0 +1,9 @@
+**/.classpath
+**/.project
+.settings/
+**/.externalToolBuilders
+/bin/
+**/target/
+*.jpage
+**/project.repositories
+*.ucls

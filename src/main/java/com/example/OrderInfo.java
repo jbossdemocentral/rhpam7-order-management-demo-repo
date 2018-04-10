@@ -27,9 +27,8 @@ public class OrderInfo implements java.io.Serializable {
 	@org.kie.api.definition.type.Label("rejection reason")
 	private String rejectionReason;
 
-	public OrderInfo(long orderId, java.lang.String item,
-			java.lang.String category, java.lang.String urgency, double price,
-			java.lang.Boolean managerApproval, java.lang.String rejectionReason) {
+	public OrderInfo(long orderId, java.lang.String item, java.lang.String category, java.lang.String urgency,
+			double price, java.lang.Boolean managerApproval, java.lang.String rejectionReason) {
 		this.orderId = orderId;
 		this.item = item;
 		this.category = category;
@@ -39,4 +38,66 @@ public class OrderInfo implements java.io.Serializable {
 		this.rejectionReason = rejectionReason;
 	}
 
+	@Override
+	public String toString() {
+		return String.format(
+				"OrderInfo [orderId=%s, item=%s, category=%s, urgency=%s, price=%s, managerApproval=%s, rejectionReason=%s]",
+				orderId, item, category, urgency, price, managerApproval, rejectionReason);
+	}
+
+	public long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(long orderId) {
+		this.orderId = orderId;
+	}
+
+	public java.lang.String getItem() {
+		return item;
+	}
+
+	public void setItem(java.lang.String item) {
+		this.item = item;
+	}
+
+	public java.lang.String getCategory() {
+		return category;
+	}
+
+	public void setCategory(java.lang.String category) {
+		this.category = category;
+	}
+
+	public java.lang.String getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(java.lang.String urgency) {
+		this.urgency = urgency;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Boolean getManagerApproval() {
+		return managerApproval;
+	}
+
+	public void setManagerApproval(Boolean managerApproval) {
+		this.managerApproval = managerApproval;
+	}
+
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
 }
