@@ -26,12 +26,12 @@
   <conditionPatterns>
     <Pattern52>
       <factType>OrderInfo</factType>
-      <boundName>orderInfo</boundName>
+      <boundName>f1</boundName>
       <isNegated>false</isNegated>
       <conditions>
         <condition-column52>
           <typedDefaultValue>
-            <valueString>basic</valueString>
+            <valueString></valueString>
             <dataType>STRING</dataType>
             <isOtherwise>false</isOtherwise>
           </typedDefaultValue>
@@ -64,7 +64,7 @@
         <condition-column52>
           <typedDefaultValue>
             <valueString></valueString>
-            <dataType>NUMERIC_DOUBLE</dataType>
+            <dataType>STRING</dataType>
             <isOtherwise>false</isOtherwise>
           </typedDefaultValue>
           <hideColumn>false</hideColumn>
@@ -81,30 +81,21 @@
         <parameters/>
       </window>
     </Pattern52>
-    <Pattern52>
-      <factType>SupplierInfo</factType>
-      <boundName>supplierInfo</boundName>
-      <isNegated>false</isNegated>
-      <conditions/>
-      <window>
-        <parameters/>
-      </window>
-    </Pattern52>
   </conditionPatterns>
   <actionCols>
     <set-field-col52>
       <typedDefaultValue>
-        <valueBoolean>true</valueBoolean>
         <valueString></valueString>
-        <dataType>BOOLEAN</dataType>
+        <dataType>STRING</dataType>
         <isOtherwise>false</isOtherwise>
       </typedDefaultValue>
       <hideColumn>false</hideColumn>
       <width>100</width>
       <header>approved</header>
-      <boundName>orderInfo</boundName>
+      <boundName>f1</boundName>
       <factField>managerApproval</factField>
       <type>Boolean</type>
+      <valueList>true,false</valueList>
       <update>false</update>
     </set-field-col52>
   </actionCols>
@@ -140,7 +131,7 @@
   </imports>
   <packageName>com.example</packageName>
   <tableFormat>EXTENDED_ENTRY</tableFormat>
-  <hitPolicy>UNIQUE_HIT</hitPolicy>
+  <hitPolicy>FIRST_HIT</hitPolicy>
   <data>
     <list>
       <value>
@@ -170,12 +161,16 @@
         <isOtherwise>false</isOtherwise>
       </value>
       <value>
-        <valueNumeric class="double">1000.0</valueNumeric>
+        <valueNumeric class="double">500.0</valueNumeric>
         <valueString></valueString>
         <dataType>NUMERIC_DOUBLE</dataType>
         <isOtherwise>false</isOtherwise>
       </value>
-      <value reference="../../../actionCols/set-field-col52/typedDefaultValue"/>
+      <value>
+        <valueString>true</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
     </list>
     <list>
       <value>
@@ -210,7 +205,11 @@
         <dataType>NUMERIC_DOUBLE</dataType>
         <isOtherwise>false</isOtherwise>
       </value>
-      <value reference="../../../actionCols/set-field-col52/typedDefaultValue"/>
+      <value>
+        <valueString>true</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
     </list>
     <list>
       <value>
@@ -241,7 +240,11 @@
         <dataType>NUMERIC_DOUBLE</dataType>
         <isOtherwise>false</isOtherwise>
       </value>
-      <value reference="../../../actionCols/set-field-col52/typedDefaultValue"/>
+      <value>
+        <valueString>true</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
     </list>
     <list>
       <value>
@@ -272,7 +275,87 @@
         <dataType>NUMERIC_DOUBLE</dataType>
         <isOtherwise>false</isOtherwise>
       </value>
-      <value reference="../../../actionCols/set-field-col52/typedDefaultValue"/>
+      <value>
+        <valueString>true</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+    </list>
+    <list>
+      <value>
+        <valueNumeric class="int">5</valueNumeric>
+        <valueString></valueString>
+        <dataType>NUMERIC_INTEGER</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>approval</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>basic</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString></valueString>
+        <dataType>NUMERIC_DOUBLE</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>false</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+    </list>
+    <list>
+      <value>
+        <valueNumeric class="int">6</valueNumeric>
+        <valueString></valueString>
+        <dataType>NUMERIC_INTEGER</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>approval</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>optional</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString></valueString>
+        <dataType>NUMERIC_DOUBLE</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>false</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
     </list>
   </data>
 </decision-table52>
