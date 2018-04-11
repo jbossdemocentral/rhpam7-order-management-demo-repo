@@ -12,13 +12,9 @@
 	<properties>
 		<version>7.7.0.Final-redhat-1</version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>guvnor-m2-repo</id>
-			<name>Guvnor M2 Repo</name>
-			<url>file:///home/donato/apps/rhpam-er2/bin/repositories/kie/global</url>
-		</repository>
-	</repositories>
+		<!-- NO MAVEN REPO -->
+		<!-- 
+
 	<dependencies>
 		<dependency>
 			<groupId>org.kie</groupId>
@@ -37,6 +33,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+		 -->
 	<build>
 		<plugins>
 			<plugin>
