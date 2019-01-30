@@ -1,17 +1,12 @@
 Red Had Process Automation Manager - Order Management Demo Repository
 =====================================================================
 
-Important Disclaimer
----------------------------------------------------------------------
-
-In order to import this project, you have to enable **multiple incoming connection**, adding the following system properties to your runtime platform:
-
- - `jbpm.enable.multi.con=true`
 
 **Red Had Process Automation Manager** is 100% open source and the upstream effort is known as [jbpm](http://www.jbpm.org).
 
+
 How to import this demo project
----------------------------------------------------------------------
+-----------------------------------
 
 This repository can be imported in your Business Central following these steps:
 
@@ -21,3 +16,16 @@ This repository can be imported in your Business Central following these steps:
 4. *Fill the* **Repository URL** field with this githup repository URL and, finally, *select* **Import**
 
 
+Task Assignment
+-----------------------------------
+
+- Task: **Request Offer** - User Group: `rest-all`
+- Task: **Prepare Offer** - Dynamically assigned to the `actorId = #{supplierInfo.user}`
+- Task: **Approve** - User Group: `Administrators`
+- Task: **OrderRejected** - User Group: `rest-all` (Routed to the Swimlane Actor)
+
+
+Change Log
+-----------------------------------
+
+ - 2019-01-29: changed user group to match existing one in OCP standard image.

@@ -7,3 +7,4 @@
 *.jpage
 **/project.repositories
 *.ucls
+*.backup
