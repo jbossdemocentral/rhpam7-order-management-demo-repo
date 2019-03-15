@@ -60,4 +60,6 @@ Demo script
 Change Log
 -----------------------------------
 
+- 2019-03-15: process description with order item
+- 2019-03-13: documentation improved
 - 2019-01-29: changed user group to match existing one in OCP standard image.
