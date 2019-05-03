@@ -11,6 +11,6 @@ public class OrderManagementScript {
 
     public static void requestOfferExit(ProcessContext kcontext) {
         OrderInfo orderInfo = (OrderInfo) kcontext.getVariable("orderInfo");
-        kcontext.setVariable("supplierList", orderInfo.getSuppliersList());
+        kcontext.setVariable("suppliersList", orderInfo.getSuppliersList());
     }
 }
