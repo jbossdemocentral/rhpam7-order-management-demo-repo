@@ -26,6 +26,7 @@ public class OrderManagementScript {
         System.out.println("supplier offer: "+supplierInfo.getOffer());
 
         suppliersInfoList.add(supplierInfo);
+        kcontext.setVariable("suppliersInfoList",suppliersInfoList);
         suppliersInfoList.stream().min(Comparator.comparing(SupplierInfo::getOffer)).ifPresent(s -> {
             kcontext.setVariable("supplierInfo", s);           
         });
