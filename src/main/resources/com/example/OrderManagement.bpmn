@@ -303,7 +303,7 @@ context.setVariable("orderInfo",orderInfo);]]></drools:script>
         <bpmn2:loopDataOutputRef>B061375B-DB34-4AE2-BCA5-0DC92172EBF3_OUT_COLLECTIONOutputX</bpmn2:loopDataOutputRef>
         <bpmn2:inputDataItem xsi:type="bpmn2:tDataInput" id="supplier" itemSubjectRef="B061375B-DB34-4AE2-BCA5-0DC92172EBF3_multiInstanceItemType_supplier" name="supplier"/>
         <bpmn2:outputDataItem xsi:type="bpmn2:tDataOutput" id="supplier" itemSubjectRef="B061375B-DB34-4AE2-BCA5-0DC92172EBF3_multiInstanceItemType_supplier" name="supplier"/>
-        <bpmn2:completionCondition xsi:type="bpmn2:tFormalExpression" id="_5Rv6dG3yEem9Md-epxhRUA"><![CDATA[supplierInfo.offer <= orderInfo.tagetPrice]]></bpmn2:completionCondition>
+        <bpmn2:completionCondition xsi:type="bpmn2:tFormalExpression" id="_5Rv6dG3yEem9Md-epxhRUA"><![CDATA[supplierInfo.offer <= orderInfo.targetPrice]]></bpmn2:completionCondition>
       </bpmn2:multiInstanceLoopCharacteristics>
     </bpmn2:userTask>
     <bpmn2:endEvent id="7502F2B7-0E52-4FC7-AD82-4C7815DCA541">

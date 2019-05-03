@@ -8,15 +8,6 @@ public class OrderInfo implements java.io.Serializable {
 
 	static final long serialVersionUID = 1L;
 
-	@org.kie.api.definition.type.Description(value = "suppliers list to involve")
-	@org.kie.api.definition.type.Label(value = "suppliers list")
-	private java.util.List<java.lang.String> suppliersList;
-	@org.kie.api.definition.type.Label(value = "target price")
-	private double tagetPrice;
-
-	public OrderInfo() {
-	}
-
 	@org.kie.api.definition.type.Label("order id")
 	private long orderId;
 	@org.kie.api.definition.type.Label("item name")
@@ -32,15 +23,43 @@ public class OrderInfo implements java.io.Serializable {
 	private Boolean managerApproval;
 	@org.kie.api.definition.type.Label("rejection reason")
 	private String rejectionReason;
+	@org.kie.api.definition.type.Description(value = "suppliers list to involve")
+	@org.kie.api.definition.type.Label(value = "suppliers list")
+	private java.util.List<java.lang.String> suppliersList;
+	@org.kie.api.definition.type.Label(value = "target price")
+	private double targetPrice;
+
+	public OrderInfo() {
+	}
+
+	public OrderInfo(java.util.List<java.lang.String> suppliersList,
+			double targetPrice, long orderId, java.lang.String item,
+			java.lang.String category, java.lang.String urgency, double price,
+			java.lang.Boolean managerApproval, java.lang.String rejectionReason) {
+		this.suppliersList = suppliersList;
+		this.targetPrice = targetPrice;
+		this.orderId = orderId;
+		this.item = item;
+		this.category = category;
+		this.urgency = urgency;
+		this.price = price;
+		this.managerApproval = managerApproval;
+		this.rejectionReason = rejectionReason;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 
 	@Override
 	public String toString() {
-		return String
-				.format("OrderInfo [orderId=%s, item=%s, category=%s, urgency=%s, price=%s, managerApproval=%s, rejectionReason=%s]",
-						orderId, item, category, urgency, price,
-						managerApproval, rejectionReason);
+		return String.format(
+				"OrderInfo {category: %s, item: %s, managerApproval: %s, orderId: %s, price: %s, rejectionReason: %s, suppliersList: %s, targetPrice: %s, urgency: %s }",
+				category, item, managerApproval, orderId, price, rejectionReason, suppliersList, targetPrice, urgency);
 	}
-
+	
 	public long getOrderId() {
 		return orderId;
 	}
@@ -105,26 +124,11 @@ public class OrderInfo implements java.io.Serializable {
 		this.suppliersList = suppliersList;
 	}
 
-	public double getTagetPrice() {
-		return this.tagetPrice;
+	public double getTargetPrice() {
+		return this.targetPrice;
 	}
 
-	public void setTagetPrice(double tagetPrice) {
-		this.tagetPrice = tagetPrice;
-	}
-
-	public OrderInfo(java.util.List<java.lang.String> suppliersList,
-			double tagetPrice, long orderId, java.lang.String item,
-			java.lang.String category, java.lang.String urgency, double price,
-			java.lang.Boolean managerApproval, java.lang.String rejectionReason) {
-		this.suppliersList = suppliersList;
-		this.tagetPrice = tagetPrice;
-		this.orderId = orderId;
-		this.item = item;
-		this.category = category;
-		this.urgency = urgency;
-		this.price = price;
-		this.managerApproval = managerApproval;
-		this.rejectionReason = rejectionReason;
+	public void setTargetPrice(double targetPrice) {
+		this.targetPrice = targetPrice;
 	}
 }
