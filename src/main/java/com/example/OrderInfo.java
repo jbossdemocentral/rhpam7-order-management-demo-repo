@@ -8,6 +8,12 @@ public class OrderInfo implements java.io.Serializable {
 
 	static final long serialVersionUID = 1L;
 
+	@org.kie.api.definition.type.Description(value = "suppliers list to involve")
+	@org.kie.api.definition.type.Label(value = "suppliers list")
+	private java.util.List<java.lang.String> suppliersList;
+	@org.kie.api.definition.type.Label(value = "target price")
+	private double tagetPrice;
+
 	public OrderInfo() {
 	}
 
@@ -27,22 +33,12 @@ public class OrderInfo implements java.io.Serializable {
 	@org.kie.api.definition.type.Label("rejection reason")
 	private String rejectionReason;
 
-	public OrderInfo(long orderId, java.lang.String item, java.lang.String category, java.lang.String urgency,
-			double price, java.lang.Boolean managerApproval, java.lang.String rejectionReason) {
-		this.orderId = orderId;
-		this.item = item;
-		this.category = category;
-		this.urgency = urgency;
-		this.price = price;
-		this.managerApproval = managerApproval;
-		this.rejectionReason = rejectionReason;
-	}
-
 	@Override
 	public String toString() {
-		return String.format(
-				"OrderInfo [orderId=%s, item=%s, category=%s, urgency=%s, price=%s, managerApproval=%s, rejectionReason=%s]",
-				orderId, item, category, urgency, price, managerApproval, rejectionReason);
+		return String
+				.format("OrderInfo [orderId=%s, item=%s, category=%s, urgency=%s, price=%s, managerApproval=%s, rejectionReason=%s]",
+						orderId, item, category, urgency, price,
+						managerApproval, rejectionReason);
 	}
 
 	public long getOrderId() {
@@ -98,6 +94,37 @@ public class OrderInfo implements java.io.Serializable {
 	}
 
 	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
+
+	public java.util.List<java.lang.String> getSuppliersList() {
+		return this.suppliersList;
+	}
+
+	public void setSuppliersList(java.util.List<java.lang.String> suppliersList) {
+		this.suppliersList = suppliersList;
+	}
+
+	public double getTagetPrice() {
+		return this.tagetPrice;
+	}
+
+	public void setTagetPrice(double tagetPrice) {
+		this.tagetPrice = tagetPrice;
+	}
+
+	public OrderInfo(java.util.List<java.lang.String> suppliersList,
+			double tagetPrice, long orderId, java.lang.String item,
+			java.lang.String category, java.lang.String urgency, double price,
+			java.lang.Boolean managerApproval, java.lang.String rejectionReason) {
+		this.suppliersList = suppliersList;
+		this.tagetPrice = tagetPrice;
+		this.orderId = orderId;
+		this.item = item;
+		this.category = category;
+		this.urgency = urgency;
+		this.price = price;
+		this.managerApproval = managerApproval;
 		this.rejectionReason = rejectionReason;
 	}
 }

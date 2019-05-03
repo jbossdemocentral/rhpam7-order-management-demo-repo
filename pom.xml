@@ -10,11 +10,8 @@
 	<name>Order Management</name>
 	<description></description>
 	<properties>
-		<version>7.7.0.Final-redhat-1</version>
+		<ba.version>7.3.0.GA-redhat-00002</ba.version>
 	</properties>
-		<!-- NO MAVEN REPO -->
-		<!-- 
-
 	<dependencies>
 		<dependency>
 			<groupId>org.kie</groupId>
@@ -25,15 +22,14 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.jbpm</groupId>
-				<artifactId>jbpm-bom</artifactId>
-				<version>${version}</version>
-				<type>pom</type>
+				<groupId>com.redhat.ba</groupId>
+				<artifactId>ba-platform-bom</artifactId>
+				<version>${ba.version}</version>
 				<scope>import</scope>
+				<type>pom</type>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-		 -->
 	<build>
 		<plugins>
 			<plugin>

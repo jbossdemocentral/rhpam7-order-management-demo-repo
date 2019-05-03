@@ -1,7 +1,8 @@
-**/.classpath
-**/.project
-.settings/
-**/.externalToolBuilders
+# hidden dir
+/.*
+!/.gitignore
+
+
 /bin/
 **/target/
 *.jpage

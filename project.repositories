@@ -3,14 +3,6 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>jboss-early-repository</id>
-        <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
         <id>local</id>
         <url>/home/donato/.m2/repository</url>
         <source>LOCAL</source>
@@ -19,31 +11,7 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>rh-plugin-repository</id>
-        <url>file:///home/donato/Downloads/RH/maven-repository</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>jboss-brms-bpmsuite-repository-64</id>
-        <url>file:///home/donato/Downloads/RH/bpm/64/maven-repository</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>jboss-brms-bpmsuite-plugin-repository-64</id>
-        <url>file:///home/donato/Downloads/RH/bpm/64/maven-repository</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>jboss-early-plugin-repository</id>
+        <id>jboss-early-repository</id>
         <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
         <source>SETTINGS</source>
       </metadata>
@@ -60,6 +28,22 @@
       <include>true</include>
       <metadata>
         <id>rh-repository</id>
+        <url>file:///home/donato/Downloads/RH/maven-repository</url>
+        <source>SETTINGS</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>jboss-early-plugin-repository</id>
+        <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
+        <source>SETTINGS</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>rh-plugin-repository</id>
         <url>file:///home/donato/Downloads/RH/maven-repository</url>
         <source>SETTINGS</source>
       </metadata>
