@@ -3,33 +3,9 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>jboss-early-repository</id>
-        <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
         <id>local</id>
         <url>/home/donato/.m2/repository</url>
         <source>LOCAL</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>central</id>
-        <url>https://repo.maven.apache.org/maven2</url>
-        <source>PROJECT</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>jboss-ga-repository</id>
-        <url>https://maven.repository.redhat.com/ga/</url>
-        <source>SETTINGS</source>
       </metadata>
     </repository>
     <repository>
@@ -51,8 +27,32 @@
     <repository>
       <include>true</include>
       <metadata>
+        <id>jboss-ga-repository</id>
+        <url>https://maven.repository.redhat.com/ga/</url>
+        <source>SETTINGS</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
         <id>offline-plugin-repository</id>
         <url>file:///home/donato/Downloads/RH/maven-repository</url>
+        <source>SETTINGS</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>central</id>
+        <url>https://repo.maven.apache.org/maven2</url>
+        <source>PROJECT</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>jboss-early-repository</id>
+        <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
         <source>SETTINGS</source>
       </metadata>
     </repository>
