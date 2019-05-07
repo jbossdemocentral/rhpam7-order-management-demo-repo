@@ -1,0 +1,16 @@
+<list>
+  <com.example.OrderInfo>
+    <orderId>0</orderId>
+    <item>Phone Huawei P10</item>
+    <urgency>low</urgency>
+    <price>0.0</price>
+    <targetPrice>0.0</targetPrice>
+  </com.example.OrderInfo>
+  <com.example.OrderInfo>
+    <orderId>0</orderId>
+    <item>Laptop Dell XPS 15</item>
+    <urgency>medium</urgency>
+    <price>0.0</price>
+    <targetPrice>0.0</targetPrice>
+  </com.example.OrderInfo>
+</list>
