@@ -13,4 +13,25 @@
     <price>0.0</price>
     <targetPrice>0.0</targetPrice>
   </com.example.OrderInfo>
+  <com.example.OrderInfo>
+    <orderId>0</orderId>
+    <item>Printer Samsung SCX 3404FW</item>
+    <urgency>medium</urgency>
+    <price>0.0</price>
+    <targetPrice>0.0</targetPrice>
+  </com.example.OrderInfo>
+  <com.example.OrderInfo>
+    <orderId>0</orderId>
+    <item>Laptop Lenovo T480s</item>
+    <urgency>high</urgency>
+    <price>0.0</price>
+    <targetPrice>0.0</targetPrice>
+  </com.example.OrderInfo>
+  <com.example.OrderInfo>
+    <orderId>0</orderId>
+    <item>Phone Huawei P30</item>
+    <urgency>high</urgency>
+    <price>0.0</price>
+    <targetPrice>0.0</targetPrice>
+  </com.example.OrderInfo>
 </list>
