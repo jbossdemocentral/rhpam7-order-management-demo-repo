@@ -29,6 +29,8 @@ import org.jbpm.services.api.service.ServiceRegistry;
 import org.kie.api.runtime.KieRuntime;
 import org.kie.api.runtime.process.ProcessContext;
 import org.kie.api.runtime.process.ProcessInstance;
+import org.kie.api.task.model.OrganizationalEntity;
+import org.kie.api.task.model.PeopleAssignments;
 import org.kie.api.task.model.Task;
 
 /**
@@ -37,6 +39,7 @@ import org.kie.api.task.model.Task;
 public class OFDemoInit {
 
     final static private int PROBABILITY = 60;
+    private static final String userId = "donato";
     private static String processId = "OrderManagement";
     private static Random random = new Random(System.currentTimeMillis());
 
@@ -65,7 +68,7 @@ public class OFDemoInit {
             processInstanceList.add(processInstance.getId());
         }
 
-        kcontext.setVariable("processInstanceList", processInstanceList);        
+        kcontext.setVariable("processInstanceList", processInstanceList);
     }
 
     public static void performTasksRequestOffer(ProcessContext kcontext) {
@@ -78,33 +81,33 @@ public class OFDemoInit {
         List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
 
         for (Long id : processInstanceList) {
-            if (random.nextInt(100) > PROBABILITY) {
+            if (random.nextInt(100) < PROBABILITY) {
+                List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
+
+                for (Long taskId : taskIdList) {
+                    Task task = userTaskService.getTask(taskId);
+                    PeopleAssignments assign = task.getPeopleAssignments();
+                    List<OrganizationalEntity> pots = assign.getPotentialOwners();
+                    OrganizationalEntity oentity = pots.get(0);
+                    userTaskService.claim(taskId, oentity.getId());
+
+                    Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
+                    OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
+                    orderInfo.setTargetPrice(60 * random.nextInt(10));
+                    orderInfo.setCategory("basic");
+                    List<String> suppliers;
+                    if (random.nextInt(1) == 0)
+                        suppliers = Arrays.asList("supplier1", "supplier3");
+                    else
+                        suppliers = Arrays.asList("supplier2", "supplier3");
+
+                    orderInfo.setSuppliersList(suppliers);
+                    userTaskService.start(taskId, userId);
+                    userTaskService.complete(taskId, userId, iomap);
+                }
+            } else {
                 processInstanceList.remove(id);
-                break;
             }
-
-            List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
-
-            for (Long taskId : taskIdList) {
-                userTaskService.claim(taskId, null);
-                Task task = userTaskService.getTask(taskId);
-                
-                Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
-                OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
-                orderInfo.setTargetPrice(60 * random.nextInt(10));
-                orderInfo.setCategory("basic");
-                List<String> suppliers;
-                if (random.nextInt(1) == 0)
-                    suppliers = Arrays.asList("supplier1", "supplier3");
-                else
-                    suppliers = Arrays.asList("supplier2", "supplier3");
-
-                orderInfo.setSuppliersList(suppliers);
-                String userId = task.getTaskData().getActualOwner().getId();
-                userTaskService.start(taskId, userId);
-                userTaskService.complete(taskId, userId, iomap);
-            }
-
         }
         kcontext.setVariable("processInstanceList", processInstanceList);
     }
@@ -119,52 +122,28 @@ public class OFDemoInit {
         List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
 
         for (Long id : processInstanceList) {
-            if (random.nextInt(100) > PROBABILITY) {
+            if (random.nextInt(100) < PROBABILITY) {
+                List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
+
+                for (Long taskId : taskIdList) {
+                    userTaskService.claim(taskId, userId);
+
+                    Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
+                    OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
+                    SupplierInfo supplierInfo = new SupplierInfo();
+                    supplierInfo.setDeliveryDate(
+                            new Date(LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
+                    supplierInfo.setOffer(orderInfo.getTargetPrice() + 10 * random.nextInt(10));
+                    supplierInfo.setUser((String) iomap.get("supplier"));
+                    iomap.put("supplierInfo", supplierInfo);
+                    userTaskService.start(taskId, userId);
+                    userTaskService.complete(taskId, userId, iomap);
+                }
+            } else
                 processInstanceList.remove(id);
-                break;
-            }
-
-            List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
-
-            for (Long taskId : taskIdList) {
-                userTaskService.claim(taskId, null);
-                Task task = userTaskService.getTask(taskId);
-                
-                Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
-                OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
-                SupplierInfo supplierInfo = new SupplierInfo();
-                supplierInfo.setDeliveryDate(new Date(LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
-                supplierInfo.setOffer(orderInfo.getTargetPrice()+10*random.nextInt(10));
-                supplierInfo.setUser((String) iomap.get("supplier"));
-                iomap.put("supplierInfo", supplierInfo);
-                String userId = task.getTaskData().getActualOwner().getId();
-                userTaskService.start(taskId, userId);
-                userTaskService.complete(taskId, userId, iomap);
-            }
 
         }
         kcontext.setVariable("processInstanceList", processInstanceList);
-    }
-
-    public static void performTasksTest(ProcessContext kcontext) {
-        RuntimeDataService runtimeDataService = (RuntimeDataService) ServiceRegistry.get()
-                .service(ServiceRegistry.RUNTIME_DATA_SERVICE);
-
-        UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
-                .service(ServiceRegistry.USER_TASK_SERVICE);
-
-        List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
-
-        for (Long id : processInstanceList) {
-            if (random.nextInt(100) > PROBABILITY)
-                break;
-
-            List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
-
-            for (Long taskId : taskIdList) {
-                userTaskService.claim(taskId, null);
-            }
-        }
     }
 
     public static void main(String[] args) {
