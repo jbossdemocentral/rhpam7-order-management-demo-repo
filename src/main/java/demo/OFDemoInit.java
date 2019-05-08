@@ -44,6 +44,7 @@ public class OFDemoInit {
     public static void initDemo(ProcessContext kcontext) {
         startProcesses(kcontext);
         performTasksRequestOffer(kcontext);
+        performTasksPrepareOffer(kcontext);
     }
 
     public static void startProcesses(ProcessContext kcontext) {
