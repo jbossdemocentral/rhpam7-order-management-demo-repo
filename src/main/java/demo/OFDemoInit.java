@@ -2,14 +2,21 @@ package demo;
 
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import com.example.OrderInfo;
+import com.example.SupplierInfo;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAliasType;
@@ -29,12 +36,17 @@ import org.kie.api.task.model.Task;
  */
 public class OFDemoInit {
 
-    final static private int PROBABILITY = 30;
+    final static private int PROBABILITY = 60;
     private static String processId = "OrderManagement";
     private static Random random = new Random(System.currentTimeMillis());
 
     // demo.OFDemoInit.initDemo(kcontext);
     public static void initDemo(ProcessContext kcontext) {
+        startProcesses(kcontext);
+        performTasksRequestOffer(kcontext);
+    }
+
+    public static void startProcesses(ProcessContext kcontext) {
         KieRuntime runtime = kcontext.getKieRuntime();
 
         InputStream res = OFDemoInit.class.getClassLoader().getResourceAsStream("demo/order-info-list.xml");
@@ -52,8 +64,85 @@ public class OFDemoInit {
             processInstanceList.add(processInstance.getId());
         }
 
+        kcontext.setVariable("processInstanceList", processInstanceList);        
+    }
+
+    public static void performTasksRequestOffer(ProcessContext kcontext) {
+        RuntimeDataService runtimeDataService = (RuntimeDataService) ServiceRegistry.get()
+                .service(ServiceRegistry.RUNTIME_DATA_SERVICE);
+
+        UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
+                .service(ServiceRegistry.USER_TASK_SERVICE);
+
+        List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
+
+        for (Long id : processInstanceList) {
+            if (random.nextInt(100) > PROBABILITY) {
+                processInstanceList.remove(id);
+                break;
+            }
+
+            List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
+
+            for (Long taskId : taskIdList) {
+                userTaskService.claim(taskId, null);
+                Task task = userTaskService.getTask(taskId);
+                
+                Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
+                OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
+                orderInfo.setTargetPrice(60 * random.nextInt(10));
+                orderInfo.setCategory("basic");
+                List<String> suppliers;
+                if (random.nextInt(1) == 0)
+                    suppliers = Arrays.asList("supplier1", "supplier3");
+                else
+                    suppliers = Arrays.asList("supplier2", "supplier3");
+
+                orderInfo.setSuppliersList(suppliers);
+                String userId = task.getTaskData().getActualOwner().getId();
+                userTaskService.start(taskId, userId);
+                userTaskService.complete(taskId, userId, iomap);
+            }
+
+        }
         kcontext.setVariable("processInstanceList", processInstanceList);
-        performTasksTest(kcontext);
+    }
+
+    public static void performTasksPrepareOffer(ProcessContext kcontext) {
+        RuntimeDataService runtimeDataService = (RuntimeDataService) ServiceRegistry.get()
+                .service(ServiceRegistry.RUNTIME_DATA_SERVICE);
+
+        UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
+                .service(ServiceRegistry.USER_TASK_SERVICE);
+
+        List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
+
+        for (Long id : processInstanceList) {
+            if (random.nextInt(100) > PROBABILITY) {
+                processInstanceList.remove(id);
+                break;
+            }
+
+            List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
+
+            for (Long taskId : taskIdList) {
+                userTaskService.claim(taskId, null);
+                Task task = userTaskService.getTask(taskId);
+                
+                Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
+                OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
+                SupplierInfo supplierInfo = new SupplierInfo();
+                supplierInfo.setDeliveryDate(new Date(LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
+                supplierInfo.setOffer(orderInfo.getTargetPrice()+10*random.nextInt(10));
+                supplierInfo.setUser((String) iomap.get("supplier"));
+                iomap.put("supplierInfo", supplierInfo);
+                String userId = task.getTaskData().getActualOwner().getId();
+                userTaskService.start(taskId, userId);
+                userTaskService.complete(taskId, userId, iomap);
+            }
+
+        }
+        kcontext.setVariable("processInstanceList", processInstanceList);
     }
 
     public static void performTasksTest(ProcessContext kcontext) {
@@ -77,123 +166,28 @@ public class OFDemoInit {
         }
     }
 
-    public static void performTasks(ProcessContext kcontext) {
-        RuntimeDataService runtimeDataService = (RuntimeDataService) ServiceRegistry.get()
-                .service(ServiceRegistry.RUNTIME_DATA_SERVICE);
-
-        UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
-                .service(ServiceRegistry.USER_TASK_SERVICE);
-
-        List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
-
-        for (Long id : processInstanceList) {
-            if (random.nextInt(100) > PROBABILITY)
-                break;
-
-            List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
-
-            for (Long taskId : taskIdList) {
-                userTaskService.claim(taskId, null);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         // XStream xStream = new XStream();
         // xStream.setClassLoader(OFDemoInit.class.getClassLoader());
-
-        Map<String, Object> params = new HashMap<>();
-        OrderInfo orderInfo = new OrderInfo();
-        params.put("orderInfo", orderInfo);
-
-        PerformTask task = new PerformTask();
-        task.setName("Request Offer");
-        task.setUser("adminUser");
-        task.setLikelyhood(80);
-        task.setParams(params);
-
         // List<PerformTask> performTasks = new ArrayList<>();
         // performTasks.add(task);
         // System.out.println(xStream.toXML(performTasks));
 
         // BeanUtilsBean util = new BeanUtilsBean() {
-        //     @Override
-        //     public void copyProperty(Object obj, String name, Object value)
-        //             throws IllegalAccessException, InvocationTargetException {
-        //         if (value == null)
-        //             return;
-        //         if (value instanceof Integer && ((Integer) value).intValue() == 0)
-        //             return;
-        //         if (value instanceof Long && ((Long) value).longValue() == 0)
-        //             return;
-        //         if (value instanceof Double && ((Double) value).doubleValue() == 0)
-        //             return;
-        //         super.copyProperty(obj, name, value);
-        //     }
+        // @Override
+        // public void copyProperty(Object obj, String name, Object value)
+        // throws IllegalAccessException, InvocationTargetException {
+        // if (value == null)
+        // return;
+        // if (value instanceof Integer && ((Integer) value).intValue() == 0)
+        // return;
+        // if (value instanceof Long && ((Long) value).longValue() == 0)
+        // return;
+        // if (value instanceof Double && ((Double) value).doubleValue() == 0)
+        // return;
+        // super.copyProperty(obj, name, value);
+        // }
         // };
     }
 
-    public static class PerformTask {
-        private String name;
-        private String user;
-        private int likelyhood;
-        private Map<String, Object> params;
-
-        /**
-         * @return the name
-         */
-        public String getName() {
-            return name;
-        }
-
-        /**
-         * @param name the name to set
-         */
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        /**
-         * @return the user
-         */
-        public String getUser() {
-            return user;
-        }
-
-        /**
-         * @param user the user to set
-         */
-        public void setUser(String user) {
-            this.user = user;
-        }
-
-        /**
-         * @return the likelyhood
-         */
-        public int getLikelyhood() {
-            return likelyhood;
-        }
-
-        /**
-         * @param likelyhood the likelyhood to set
-         */
-        public void setLikelyhood(int likelyhood) {
-            this.likelyhood = likelyhood;
-        }
-
-        /**
-         * @return the params
-         */
-        public Map<String, Object> getParams() {
-            return params;
-        }
-
-        /**
-         * @param params the params to set
-         */
-        public void setParams(Map<String, Object> params) {
-            this.params = params;
-        }
-
-    }
 }
