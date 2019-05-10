@@ -23,6 +23,7 @@ import com.thoughtworks.xstream.annotations.XStreamAliasType;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.BeanUtilsBean;
+import org.jbpm.services.api.ProcessService;
 import org.jbpm.services.api.RuntimeDataService;
 import org.jbpm.services.api.UserTaskService;
 import org.jbpm.services.api.service.ServiceRegistry;
@@ -42,6 +43,7 @@ public class OFDemoInit {
     private static final String userId = "donato";
     private static String processId = "OrderManagement";
     private static Random random = new Random(System.currentTimeMillis());
+    private static String deploymentId = "order-management_1.1-SNAPSHOT";
 
     // demo.OFDemoInit.initDemo(kcontext);
     public static void initDemo(ProcessContext kcontext) {
@@ -51,7 +53,7 @@ public class OFDemoInit {
     }
 
     public static void startProcesses(ProcessContext kcontext) {
-        KieRuntime runtime = kcontext.getKieRuntime();
+        ProcessService processService = (ProcessService) ServiceRegistry.get().service(ServiceRegistry.PROCESS_SERVICE);
 
         InputStream res = OFDemoInit.class.getClassLoader().getResourceAsStream("demo/order-info-list.xml");
         XStream xStream = new XStream();
@@ -64,8 +66,8 @@ public class OFDemoInit {
         for (OrderInfo orderInfo : list) {
             params.clear();
             params.put("orderInfo", orderInfo);
-            ProcessInstance processInstance = runtime.startProcess(processId, params);
-            processInstanceList.add(processInstance.getId());
+            Long processInstanceId = processService.startProcess(deploymentId, processId, params);
+            processInstanceList.add(processInstanceId);
         }
 
         kcontext.setVariable("processInstanceList", processInstanceList);
@@ -75,21 +77,18 @@ public class OFDemoInit {
         RuntimeDataService runtimeDataService = (RuntimeDataService) ServiceRegistry.get()
                 .service(ServiceRegistry.RUNTIME_DATA_SERVICE);
 
-        UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
-                .service(ServiceRegistry.USER_TASK_SERVICE);
-
         List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
 
+        List<Long> piUpdated = new ArrayList<>();
         for (Long id : processInstanceList) {
             if (random.nextInt(100) < PROBABILITY) {
+                piUpdated.add(id);
                 List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
 
                 for (Long taskId : taskIdList) {
-                    Task task = userTaskService.getTask(taskId);
-                    PeopleAssignments assign = task.getPeopleAssignments();
-                    List<OrganizationalEntity> pots = assign.getPotentialOwners();
-                    OrganizationalEntity oentity = pots.get(0);
-                    userTaskService.claim(taskId, oentity.getId());
+                    UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
+                            .service(ServiceRegistry.USER_TASK_SERVICE);
+                    userTaskService.claim(taskId, userId);
 
                     Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
                     OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
@@ -105,11 +104,9 @@ public class OFDemoInit {
                     userTaskService.start(taskId, userId);
                     userTaskService.complete(taskId, userId, iomap);
                 }
-            } else {
-                processInstanceList.remove(id);
             }
         }
-        kcontext.setVariable("processInstanceList", processInstanceList);
+        kcontext.setVariable("processInstanceList", piUpdated);
     }
 
     public static void performTasksPrepareOffer(ProcessContext kcontext) {
