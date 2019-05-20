@@ -7,7 +7,7 @@
   <name>Order-Management</name>
   <description></description>
   <properties>
-    <ba.version>7.3.0.GA-redhat-00002</ba.version>
+    <ba.version>7.3.1.GA-redhat-00002</ba.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -39,6 +39,11 @@
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-api</artifactId>
       <scope>provided</scope>
     </dependency>
     <!--for debuging-->
