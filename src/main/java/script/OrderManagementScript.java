@@ -12,6 +12,7 @@ import org.kie.api.runtime.process.ProcessContext;
 /**
  * OrderManagementScript
  */
+@SuppressWarnings("unchecked")
 public class OrderManagementScript {
 
     public static void requestOfferExit(ProcessContext kcontext) {

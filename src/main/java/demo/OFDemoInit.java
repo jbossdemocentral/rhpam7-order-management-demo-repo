@@ -1,11 +1,8 @@
 package demo;
 
 import java.io.InputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,25 +15,17 @@ import java.util.Random;
 import com.example.OrderInfo;
 import com.example.SupplierInfo;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamAliasType;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.BeanUtilsBean;
 import org.jbpm.services.api.ProcessService;
 import org.jbpm.services.api.RuntimeDataService;
 import org.jbpm.services.api.UserTaskService;
 import org.jbpm.services.api.service.ServiceRegistry;
-import org.kie.api.runtime.KieRuntime;
 import org.kie.api.runtime.process.ProcessContext;
-import org.kie.api.runtime.process.ProcessInstance;
-import org.kie.api.task.model.OrganizationalEntity;
-import org.kie.api.task.model.PeopleAssignments;
-import org.kie.api.task.model.Task;
 
 /**
  * OFDemoInit
  */
+@SuppressWarnings("unchecked")
 public class OFDemoInit {
 
     final static private int PROBABILITY = 60;
