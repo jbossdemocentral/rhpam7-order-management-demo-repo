@@ -34,13 +34,6 @@ public class OFDemoInit {
     private static Random random = new Random(System.currentTimeMillis());
     private static String deploymentId = "order-management_1.1-SNAPSHOT";
 
-    // demo.OFDemoInit.initDemo(kcontext);
-    public static void initDemo(ProcessContext kcontext) {
-        startProcesses(kcontext);
-        performTasksRequestOffer(kcontext);
-        performTasksPrepareOffer(kcontext);
-    }
-
     public static void startProcesses(ProcessContext kcontext) {
         ProcessService processService = (ProcessService) ServiceRegistry.get().service(ServiceRegistry.PROCESS_SERVICE);
 
@@ -78,22 +71,24 @@ public class OFDemoInit {
                     UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
                             .service(ServiceRegistry.USER_TASK_SERVICE);
                     userTaskService.claim(taskId, userId);
+                    userTaskService.start(taskId, userId);
 
                     Map<String, Object> inputParams = userTaskService.getTaskInputContentByTaskId(taskId);
                     OrderInfo orderInfo = (OrderInfo) inputParams.get("orderInfo");
-                    orderInfo.setTargetPrice(60 * random.nextInt(10));
-                    orderInfo.setCategory("basic");
+                    OrderInfo orderInfo2 = new OrderInfo();
+                    orderInfo2.copy(orderInfo);
+                    orderInfo2.setTargetPrice(60 * random.nextInt(10));
+                    orderInfo2.setCategory("basic");
                     List<String> suppliers;
                     if (random.nextInt(1) == 0)
                         suppliers = Arrays.asList("supplier1", "supplier3");
                     else
                         suppliers = Arrays.asList("supplier2", "supplier3");
 
-                    orderInfo.setSuppliersList(suppliers);
-                    userTaskService.start(taskId, userId);
+                    orderInfo2.setSuppliersList(suppliers);
                     
                     Map<String,Object> outputParams = new HashMap<>();
-                    outputParams.put("orderInfo", orderInfo);
+                    outputParams.put("orderInfo", orderInfo2);
                     userTaskService.complete(taskId, userId, outputParams);
                 }
             }

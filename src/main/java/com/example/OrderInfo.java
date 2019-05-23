@@ -177,4 +177,16 @@ public class OrderInfo implements java.io.Serializable {
 		this.targetPrice = targetPrice;
 		this.id = id;
 	}
+
+	public void copy(OrderInfo orderInfo) {
+		this.orderId = orderInfo.getOrderId();
+		this.item = orderInfo.getItem();
+		this.category = orderInfo.getCategory();
+		this.urgency = orderInfo.getUrgency();
+		this.managerApproval = orderInfo.getManagerApproval();
+		this.price = orderInfo.getPrice();
+		this.rejectionReason = orderInfo.getRejectionReason();
+		//this.suppliersList = orderInfo.getSuppliersList();
+		this.targetPrice = orderInfo.getTargetPrice();
+	}
 }
