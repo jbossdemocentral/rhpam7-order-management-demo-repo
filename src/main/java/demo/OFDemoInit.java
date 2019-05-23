@@ -79,8 +79,8 @@ public class OFDemoInit {
                             .service(ServiceRegistry.USER_TASK_SERVICE);
                     userTaskService.claim(taskId, userId);
 
-                    Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
-                    OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
+                    Map<String, Object> inputParams = userTaskService.getTaskInputContentByTaskId(taskId);
+                    OrderInfo orderInfo = (OrderInfo) inputParams.get("orderInfo");
                     orderInfo.setTargetPrice(60 * random.nextInt(10));
                     orderInfo.setCategory("basic");
                     List<String> suppliers;
@@ -91,7 +91,10 @@ public class OFDemoInit {
 
                     orderInfo.setSuppliersList(suppliers);
                     userTaskService.start(taskId, userId);
-                    userTaskService.complete(taskId, userId, iomap);
+                    
+                    Map<String,Object> outputParams = new HashMap<>();
+                    outputParams.put("orderInfo", orderInfo);
+                    userTaskService.complete(taskId, userId, outputParams);
                 }
             }
         }
