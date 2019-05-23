@@ -103,8 +103,11 @@ public class OFDemoInit {
 
         List<Long> processInstanceList = (List<Long>) kcontext.getVariable("processInstanceList");
 
+        List<Long> piUpdated = new ArrayList<>();
+
         for (Long id : processInstanceList) {
             if (random.nextInt(100) < PROBABILITY) {
+                piUpdated.add(id);
                 List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
 
                 for (Long taskId : taskIdList) {
@@ -116,14 +119,11 @@ public class OFDemoInit {
                     supplierInfo.setOffer(orderInfo.getTargetPrice() + 10 * random.nextInt(10));
                     supplierInfo.setUser((String) iomap.get("supplier"));
                     iomap.put("supplierInfo", supplierInfo);
-                    userTaskService.start(taskId, userId);
-                    userTaskService.complete(taskId, userId, iomap);
+                    userTaskService.completeAutoProgress(taskId, userId, iomap);
                 }
-            } else
-                processInstanceList.remove(id);
-
+            }
         }
-        kcontext.setVariable("processInstanceList", processInstanceList);
+        kcontext.setVariable("processInstanceList", piUpdated);
     }
 
     public static void main(String[] args) {
