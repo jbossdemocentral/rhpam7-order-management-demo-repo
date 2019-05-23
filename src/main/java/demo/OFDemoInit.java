@@ -70,8 +70,6 @@ public class OFDemoInit {
                 for (Long taskId : taskIdList) {
                     UserTaskService userTaskService = (UserTaskService) ServiceRegistry.get()
                             .service(ServiceRegistry.USER_TASK_SERVICE);
-                    userTaskService.claim(taskId, userId);
-                    userTaskService.start(taskId, userId);
 
                     Map<String, Object> inputParams = userTaskService.getTaskInputContentByTaskId(taskId);
                     OrderInfo orderInfo = (OrderInfo) inputParams.get("orderInfo");
@@ -81,15 +79,15 @@ public class OFDemoInit {
                     orderInfo2.setCategory("basic");
                     List<String> suppliers;
                     if (random.nextInt(1) == 0)
-                        suppliers = Arrays.asList("supplier1", "supplier3");
+                        suppliers =  new ArrayList<>(Arrays.asList("supplier1", "supplier3"));
                     else
-                        suppliers = Arrays.asList("supplier2", "supplier3");
+                        suppliers =  new ArrayList<>(Arrays.asList("supplier2", "supplier3"));
 
                     orderInfo2.setSuppliersList(suppliers);
                     
                     Map<String,Object> outputParams = new HashMap<>();
                     outputParams.put("orderInfo", orderInfo2);
-                    userTaskService.complete(taskId, userId, outputParams);
+                    userTaskService.completeAutoProgress(taskId, userId, outputParams);
                 }
             }
         }
@@ -110,8 +108,6 @@ public class OFDemoInit {
                 List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
 
                 for (Long taskId : taskIdList) {
-                    userTaskService.claim(taskId, userId);
-
                     Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
                     OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
                     SupplierInfo supplierInfo = new SupplierInfo();
