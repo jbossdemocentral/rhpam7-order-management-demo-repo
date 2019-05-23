@@ -29,7 +29,7 @@ import org.kie.api.runtime.process.ProcessContext;
 public class OFDemoInit {
 
     final static private int PROBABILITY = 60;
-    private static final String userId = "donato";
+    private static final String userId = "Administrator";
     private static String processId = "OrderManagement";
     private static Random random = new Random(System.currentTimeMillis());
     private static String deploymentId = "order-management_1.1-SNAPSHOT";
