@@ -92,6 +92,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.item = item;
 	}
 
+	@FEELProperty("category")
 	public java.lang.String getCategory() {
 		return category;
 	}
@@ -100,6 +101,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.category = category;
 	}
 
+	@FEELProperty("urgency")
 	public java.lang.String getUrgency() {
 		return urgency;
 	}
@@ -108,6 +110,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.urgency = urgency;
 	}
 
+	@FEELProperty("price")
 	public double getPrice() {
 		return price;
 	}
@@ -116,6 +119,7 @@ public class OrderInfo implements java.io.Serializable {
 		this.price = price;
 	}
 
+	@FEELProperty("manager approval")
 	public Boolean getManagerApproval() {
 		return managerApproval;
 	}
@@ -147,11 +151,11 @@ public class OrderInfo implements java.io.Serializable {
 		return this.targetPrice;
 	}
 
-	@FEELProperty("target price")
 	public void setTargetPrice(double targetPrice) {
 		this.targetPrice = targetPrice;
 	}
 
+	@FEELProperty("id")
 	public java.lang.Long getId() {
 		return this.id;
 	}
