@@ -7,7 +7,7 @@
   <name>Order-Management</name>
   <description></description>
   <properties>
-    <ba.version>7.3.1.GA-redhat-00002</ba.version>
+    <ba.version>7.4.0.GA-redhat-00002</ba.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -50,19 +50,19 @@
     <dependency>
       <groupId>org.kie.server</groupId>
       <artifactId>kie-server-services-jbpm</artifactId>
-      <scope>provided</scope>      
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-human-task-core</artifactId>
-      <scope>provided</scope>      
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
+        <version>3.8.1</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
@@ -70,6 +70,12 @@
             <exclude>**/.*.java</exclude>
           </excludes>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.kie</groupId>
+        <artifactId>kie-maven-plugin</artifactId>
+        <version>7.23.0.Final-redhat-00002</version>
+        <extensions>true</extensions>
       </plugin>
     </plugins>
   </build>
