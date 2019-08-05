@@ -23,10 +23,10 @@ import org.jbpm.services.api.service.ServiceRegistry;
 import org.kie.api.runtime.process.ProcessContext;
 
 /**
- * OFDemoInit
+ * OMDemoInit
  */
 @SuppressWarnings("unchecked")
-public class OFDemoInit {
+public class OMDemoInit {
 
     final static private int PROBABILITY = 60;
     private static final String userId = "Administrator";
@@ -37,9 +37,9 @@ public class OFDemoInit {
     public static void startProcesses(ProcessContext kcontext) {
         ProcessService processService = (ProcessService) ServiceRegistry.get().service(ServiceRegistry.PROCESS_SERVICE);
 
-        InputStream res = OFDemoInit.class.getClassLoader().getResourceAsStream("demo/order-info-list.xml");
+        InputStream res = OMDemoInit.class.getClassLoader().getResourceAsStream("demo/order-info-list.xml");
         XStream xStream = new XStream();
-        xStream.setClassLoader(OFDemoInit.class.getClassLoader());
+        xStream.setClassLoader(OMDemoInit.class.getClassLoader());
         Collection<OrderInfo> list = (Collection<OrderInfo>) xStream.fromXML(res);
 
         Map<String, Object> params = new HashMap<>();
@@ -128,7 +128,7 @@ public class OFDemoInit {
 
     public static void main(String[] args) {
         // XStream xStream = new XStream();
-        // xStream.setClassLoader(OFDemoInit.class.getClassLoader());
+        // xStream.setClassLoader(OMDemoInit.class.getClassLoader());
         // List<PerformTask> performTasks = new ArrayList<>();
         // performTasks.add(task);
         // System.out.println(xStream.toXML(performTasks));

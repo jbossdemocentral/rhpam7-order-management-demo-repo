@@ -62,7 +62,7 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_24548D2E-C951-4F9D-8F0C-069F34DDB5FD</bpmn2:incoming>
       <bpmn2:outgoing>_4F958839-A4FD-4093-A146-C5D9C32943BC</bpmn2:outgoing>
-      <bpmn2:script><![CDATA[demo.OFDemoInit.startProcesses(kcontext);]]></bpmn2:script>
+      <bpmn2:script><![CDATA[demo.OMDemoInit.startProcesses(kcontext);]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:startEvent id="_6BA548AD-4FEE-4BE2-8B91-00CE89176079">
       <bpmn2:outgoing>_24548D2E-C951-4F9D-8F0C-069F34DDB5FD</bpmn2:outgoing>
@@ -81,7 +81,7 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_FC582EB5-98F0-4A1C-B80C-8B9A442B0070</bpmn2:incoming>
       <bpmn2:outgoing>_11B1D3CA-1771-4CC0-AC2C-171A8808AE15</bpmn2:outgoing>
-      <bpmn2:script><![CDATA[demo.OFDemoInit.performTasksPrepareOffer(kcontext);]]></bpmn2:script>
+      <bpmn2:script><![CDATA[demo.OMDemoInit.performTasksPrepareOffer(kcontext);]]></bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:scriptTask id="_997701BE-021B-4E9F-B552-A5DF8DB62608" name="Task" scriptFormat="http://www.java.com/java">
       <bpmn2:extensionElements>
@@ -103,7 +103,7 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>_4F958839-A4FD-4093-A146-C5D9C32943BC</bpmn2:incoming>
       <bpmn2:outgoing>_FC582EB5-98F0-4A1C-B80C-8B9A442B0070</bpmn2:outgoing>
-      <bpmn2:script><![CDATA[demo.OFDemoInit.performTasksRequestOffer(kcontext);]]></bpmn2:script>
+      <bpmn2:script><![CDATA[demo.OMDemoInit.performTasksRequestOffer(kcontext);]]></bpmn2:script>
     </bpmn2:scriptTask>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="_NHm3oHGnEemvH_NcUIJn9g">
