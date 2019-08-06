@@ -3,7 +3,15 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>jboss-early-plugin-repository</id>
+        <id>offline-plugin-repository</id>
+        <url>file:///home/donato/Downloads/RH/maven-repository</url>
+        <source>SETTINGS</source>
+      </metadata>
+    </repository>
+    <repository>
+      <include>true</include>
+      <metadata>
+        <id>jboss-early-repository</id>
         <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
         <source>SETTINGS</source>
       </metadata>
@@ -51,15 +59,7 @@
     <repository>
       <include>true</include>
       <metadata>
-        <id>offline-plugin-repository</id>
-        <url>file:///home/donato/Downloads/RH/maven-repository</url>
-        <source>SETTINGS</source>
-      </metadata>
-    </repository>
-    <repository>
-      <include>true</include>
-      <metadata>
-        <id>jboss-early-repository</id>
+        <id>jboss-early-plugin-repository</id>
         <url>https://maven.repository.redhat.com/earlyaccess/all/</url>
         <source>SETTINGS</source>
       </metadata>
