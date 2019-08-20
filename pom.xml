@@ -7,7 +7,8 @@
   <name>Order-Management</name>
   <description></description>
   <properties>
-    <ba.version>7.4.0.GA-redhat-00002</ba.version>
+    <ba.version>7.4.1.GA-redhat-00001</ba.version>
+    <version.org.kie>7.23.0.Final-redhat-00003</version.org.kie>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -74,7 +75,7 @@
       <plugin>
         <groupId>org.kie</groupId>
         <artifactId>kie-maven-plugin</artifactId>
-        <version>7.23.0.Final-redhat-00002</version>
+        <version>${version.org.kie}</version>
         <extensions>true</extensions>
       </plugin>
     </plugins>
