@@ -15,14 +15,7 @@
     <event-listeners/>
     <task-event-listeners/>
     <globals/>
-    <work-item-handlers>
-        <work-item-handler>
-            <resolver>mvel</resolver>
-            <identifier>new org.jbpm.process.workitem.bpmn2.DecisionTaskHandler("com.demo", "order-management-dmn", "1.0.0-SNAPSHOT",15000)</identifier>
-            <parameters/>
-            <name>DecisionTask</name>
-        </work-item-handler>
-    </work-item-handlers>
+    <work-item-handlers/>
     <environment-entries/>
     <configurations/>
     <required-roles/>
