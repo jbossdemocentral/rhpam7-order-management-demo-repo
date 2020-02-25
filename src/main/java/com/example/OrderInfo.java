@@ -2,6 +2,7 @@ package com.example;
 
 import javax.persistence.ElementCollection;
 
+import org.drools.persistence.jpa.marshaller.VariableEntity;
 import org.kie.dmn.feel.lang.FEELProperty;
 import org.kie.dmn.feel.lang.FEELType;
 
@@ -11,7 +12,7 @@ import org.kie.dmn.feel.lang.FEELType;
 
 @javax.persistence.Entity
 @FEELType
-public class OrderInfo implements java.io.Serializable {
+public class OrderInfo extends VariableEntity {
 
 	static final long serialVersionUID = 1L;
 

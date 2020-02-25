@@ -33,11 +33,18 @@
       <artifactId>jbpm-services-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <!-- Variable persistence >>> -->
     <dependency>
       <groupId>org.drools</groupId>
       <artifactId>drools-persistence-jpa</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-persistence-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- <<< Variable persistence -->
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
