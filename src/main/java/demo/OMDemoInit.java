@@ -73,20 +73,18 @@ public class OMDemoInit {
 
                     Map<String, Object> inputParams = userTaskService.getTaskInputContentByTaskId(taskId);
                     OrderInfo orderInfo = (OrderInfo) inputParams.get("orderInfo");
-                    OrderInfo orderInfo2 = new OrderInfo();
-                    orderInfo2.copy(orderInfo);
-                    orderInfo2.setTargetPrice(60 * random.nextInt(10));
-                    orderInfo2.setCategory("basic");
+                    orderInfo.setTargetPrice(60 * random.nextInt(10));
+                    orderInfo.setCategory(random.nextBoolean() ? "basic" : "optional");
                     List<String> suppliers;
                     if (random.nextInt(1) == 0)
                         suppliers =  new ArrayList<>(Arrays.asList("supplier1", "supplier3"));
                     else
                         suppliers =  new ArrayList<>(Arrays.asList("supplier2", "supplier3"));
 
-                    orderInfo2.setSuppliersList(suppliers);
+                    orderInfo.setSuppliersList(suppliers);
                     
                     Map<String,Object> outputParams = new HashMap<>();
-                    outputParams.put("orderInfo", orderInfo2);
+                    outputParams.put("orderInfo", orderInfo);
                     userTaskService.completeAutoProgress(taskId, userId, outputParams);
                 }
             }
