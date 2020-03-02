@@ -21,6 +21,7 @@ import org.jbpm.services.api.RuntimeDataService;
 import org.jbpm.services.api.UserTaskService;
 import org.jbpm.services.api.service.ServiceRegistry;
 import org.kie.api.runtime.process.ProcessContext;
+import org.kie.api.task.model.Task;
 
 /**
  * OMDemoInit
@@ -109,15 +110,19 @@ public class OMDemoInit {
                 List<Long> taskIdList = runtimeDataService.getTasksByProcessInstanceId(id);
 
                 for (Long taskId : taskIdList) {
-                    Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
-                    OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
-                    SupplierInfo supplierInfo = new SupplierInfo();
-                    supplierInfo.setDeliveryDate(
-                            new Date(LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
-                    supplierInfo.setOffer(orderInfo.getTargetPrice() + 10 * random.nextInt(10));
-                    supplierInfo.setUser((String) iomap.get("supplier"));
-                    iomap.put("supplierInfo", supplierInfo);
-                    userTaskService.completeAutoProgress(taskId, userId, iomap);
+                    Task task = userTaskService.getTask(taskId);
+
+                    if (task.getName().contentEquals("Prepare Offer")) {
+                        Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
+                        OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
+                        SupplierInfo supplierInfo = new SupplierInfo();
+                        supplierInfo.setDeliveryDate(
+                                new Date(LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
+                        supplierInfo.setOffer(orderInfo.getTargetPrice() + 10 * random.nextInt(10));
+                        supplierInfo.setUser((String) iomap.get("supplier"));
+                        iomap.put("supplierInfo", supplierInfo);
+                        userTaskService.completeAutoProgress(taskId, userId, iomap);
+                    }
                 }
             }
         }
