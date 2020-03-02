@@ -21,20 +21,10 @@ Any organization has a procurement process similar to this one:
 
 In the following picture the BPMN process design:
 
-![BPMN diagram](docs/order-management-process.png)
+![BPMN diagram](src/main/resources/com/example/OrderManagement-svg.svg)
 
 How to deploy this demo project
 -----------------------------------
-
-From version 7.3, the order management process requires a DMN decision that is implemented in a [DMN external project](https://github.com/dmarrazzo/rhpam7-order-management-dmn-demo) , for this reason the first step is to import the DMN decision project and build it:
-
-  1. From Home page *click* **Design**
-  2. In header section where is the space name (e.g. myteam) *select the kebab icon* (the 3 vertical dots icon)
-  3. *Select* **Import Project**
-  4. *Fill the* **Repository URL** field with DMN repository URL (`https://github.com/dmarrazzo/rhpam7-order-management-dmn-demo.git`)
-  5. Select *order-management-dmn* and click **Ok**
-  6. Switch to **v7.4** branch
-  7. Click **Build and Install**, in such way the DMN project (*kjar*) will be installed in the Maven repository and ready to be dynamically loaded by the process at runtime.  
 
 Import the This repository can be imported in your Business Central following these steps:
 
@@ -43,8 +33,6 @@ Import the This repository can be imported in your Business Central following th
   3. *Select* **Import Project**
   4. *Fill the* **Repository URL** field with this github repository URL (`https://github.com/jbossdemocentral/rhpam7-order-management-demo-repo.git`)
   5. Select *Order Management* and click **Ok**
-  6. Switch to **v7.4** branch
-
 
 Run the demo process
 -----------------------------------
@@ -83,6 +71,21 @@ Run the demo process
 
 - in order to create a list of running instances that make the demo more realistic. Start **OM-demo-init** process, do not change any value in the form.
 
+Dashboard Example
+-----------------------------------
+
+It's available a sample dashboard that shows some charts related to the order management business context.
+
+Follow this steps to import the dashboard:
+
+1. In Business Central, **select** the `Admin` page (the gear icon on the top right position)
+2. Scroll down to **select** the `Dashbuilder Data Transfer` tile
+3. In the `Import` pane select the file `dashboard/order-management-dashbuilder.zip` in the current project
+4. **Click** the `Import` button
+
+From the menu select `Order Reports` to show a set of chart like in the following screen shot:
+
+![Order Reports](docs/order-report.png)
 
 Task Assignment
 -----------------------------------
@@ -98,6 +101,12 @@ If in your environment, you have multiple users and roles you can change the ass
 
 Change Log
 -----------------------------------
+
+- Branch 7.6 (PAM version 7.6):
+
+   - Dashboard
+   - Fixes to **OM-demo-init**
+   - Fixes to variable persistence logic
 
 - Branch 7.4 (PAM version 7.4): 
 
