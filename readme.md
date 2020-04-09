@@ -34,6 +34,12 @@ Import the This repository can be imported in your Business Central following th
   4. *Fill the* **Repository URL** field with this github repository URL (`https://github.com/jbossdemocentral/rhpam7-order-management-demo-repo.git`)
   5. Select *Order Management* and click **Ok**
 
+**WARNING** This demo persists the `OrderInfo` data object through JPA. Since the same data object is used in web forms, in order to properly render those forms it's necessary to explicitly enable those classes with the following *system property*: 
+
+```xml
+<property name="org.kie.server.xstream.enabled.packages" value="org.drools.persistence.jpa.marshaller.*"/>
+```
+
 Run the demo process
 -----------------------------------
 
@@ -102,22 +108,27 @@ If in your environment, you have multiple users and roles you can change the ass
 Change Log
 -----------------------------------
 
-- Branch 7.6 (PAM version 7.6):
+- Version 7.7 (PAM version 7.7):
+
+   - version update
+   - documentation includes the configuration tweak to manage the correct form rendering 
+
+- Version 7.6 (PAM version 7.6):
 
    - Dashboard
    - Fixes to **OM-demo-init**
    - Fixes to variable persistence logic
 
-- Branch 7.4 (PAM version 7.4): 
+- Version 7.4 (PAM version 7.4): 
 
     - Version 7.4.1 update, task normalization, version update and documentation
     - Version 7.4 update
 
-- Branch 7.3 (PAM version 7.3): 
+- Version 7.3 (PAM version 7.3):
 
     - Version 7.3 multiple suppliers in parallel, DMN decision, demo initialization process
 
-- Branch master (PAM version 7.0)
+- Version 7.0 (PAM version 7.0):
 
     - 2019-03-15: process description with order item
     - 2019-03-13: documentation improved
