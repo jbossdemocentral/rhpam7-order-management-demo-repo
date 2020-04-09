@@ -2,7 +2,9 @@ package script;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.example.OrderInfo;
 import com.example.SupplierInfo;
@@ -22,23 +24,27 @@ public class OrderManagementScript {
     }
 
     public static void prepareOfferExit(ProcessContext kcontext) {
-        List<SupplierInfo> suppliersInfoList = (List<SupplierInfo>) kcontext.getVariable("suppliersInfoList");
-        SupplierInfo supplierInfo = (SupplierInfo) kcontext.getVariable("supplierInfo");
-
-        System.out.println("supplier offer: "+supplierInfo.getOffer());
-
-        suppliersInfoList.add(supplierInfo);
-        kcontext.setVariable("suppliersInfoList",suppliersInfoList);
-        suppliersInfoList.stream().min(Comparator.comparing(SupplierInfo::getOffer)).ifPresent(s -> {
-            kcontext.setVariable("supplierInfo", s);
-        });
+        SupplierInfo supplierInfoOut = (SupplierInfo) kcontext.getVariable("supplierInfoOut");
+        supplierInfoOut.setUser((String) kcontext.getVariable("supplier"));
+        supplierInfoOut.setDeliveryDate(new Date());
+        kcontext.setVariable("supplierInfoOut", supplierInfoOut);
+        System.out.println("prepareOfferExit: " + supplierInfoOut);
     }
 
     // Auto Approval Rules
     public static void autoApprovalRulesEntry(ProcessContext kcontext) {
-        OrderInfo orderInfo = (OrderInfo) kcontext.getVariable("orderInfo");
-        SupplierInfo supplierInfo = (SupplierInfo) kcontext.getVariable("supplierInfo");
-        orderInfo.setPrice(supplierInfo.getOffer());
-        kcontext.setVariable("orderInfo", orderInfo);
+        // select the lowest offer
+        List<SupplierInfo> suppliersInfoList = (List<SupplierInfo>) kcontext.getVariable("suppliersInfoList");
+        Optional<SupplierInfo> supplierInfoOpt = suppliersInfoList.stream()
+                .min(Comparator.comparing(SupplierInfo::getOffer));
+
+        if (supplierInfoOpt.isPresent()) {
+            kcontext.setVariable("supplierInfo", supplierInfoOpt.get());
+
+            OrderInfo orderInfo = (OrderInfo) kcontext.getVariable("orderInfo");
+
+            orderInfo.setPrice(supplierInfoOpt.get().getOffer());
+            kcontext.setVariable("orderInfo", orderInfo);
+        }
     }
 }
