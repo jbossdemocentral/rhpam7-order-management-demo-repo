@@ -110,6 +110,8 @@ Change Log
 
 - Version 7.7 (PAM version 7.7):
 
+   - process clean up
+   - improved demo launcher 
    - version update
    - documentation includes the configuration tweak to manage the correct form rendering 
 
