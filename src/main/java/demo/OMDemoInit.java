@@ -123,7 +123,7 @@ public class OMDemoInit {
                                 LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
                         supplierInfo.setOffer(orderInfo.getTargetPrice() + 10 * random.nextInt(10));
                         supplierInfo.setUser((String) iomap.get("supplier"));
-                        iomap.put("supplierInfo", supplierInfo);
+                        iomap.put("supplierInfoOut", supplierInfo);
                         userTaskService.completeAutoProgress(taskId, userId, iomap);
                     }
                 }
