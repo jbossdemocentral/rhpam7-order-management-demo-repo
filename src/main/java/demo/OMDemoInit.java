@@ -31,7 +31,7 @@ public class OMDemoInit {
 
     final static private int PROBABILITY = 60;
     private static final String userId = "Administrator";
-    private static String processId = "OrderManagement";
+    private static String processId = "Order-Management.order-management";
     private static Random random = new Random(System.currentTimeMillis());
     private static String deploymentId = "order-management_1.1-SNAPSHOT";
 
@@ -49,7 +49,9 @@ public class OMDemoInit {
         for (OrderInfo orderInfo : list) {
             params.clear();
             params.put("orderInfo", orderInfo);
+
             Long processInstanceId = processService.startProcess(deploymentId, processId, params);
+
             processInstanceList.add(processInstanceId);
         }
 
@@ -78,13 +80,13 @@ public class OMDemoInit {
                     orderInfo.setCategory(random.nextBoolean() ? "basic" : "optional");
                     List<String> suppliers;
                     if (random.nextInt(1) == 0)
-                        suppliers =  new ArrayList<>(Arrays.asList("supplier1", "supplier3"));
+                        suppliers = new ArrayList<>(Arrays.asList("supplier1", "supplier3"));
                     else
-                        suppliers =  new ArrayList<>(Arrays.asList("supplier2", "supplier3"));
+                        suppliers = new ArrayList<>(Arrays.asList("supplier2", "supplier3"));
 
                     orderInfo.setSuppliersList(suppliers);
-                    
-                    Map<String,Object> outputParams = new HashMap<>();
+
+                    Map<String, Object> outputParams = new HashMap<>();
                     outputParams.put("orderInfo", orderInfo);
                     userTaskService.completeAutoProgress(taskId, userId, outputParams);
                 }
@@ -116,8 +118,8 @@ public class OMDemoInit {
                         Map<String, Object> iomap = userTaskService.getTaskInputContentByTaskId(taskId);
                         OrderInfo orderInfo = (OrderInfo) iomap.get("orderInfo");
                         SupplierInfo supplierInfo = new SupplierInfo();
-                        supplierInfo.setDeliveryDate(
-                                new Date(LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
+                        supplierInfo.setDeliveryDate(new Date(
+                                LocalDateTime.now().plusDays(random.nextInt(15)).toEpochSecond(ZoneOffset.UTC)));
                         supplierInfo.setOffer(orderInfo.getTargetPrice() + 10 * random.nextInt(10));
                         supplierInfo.setUser((String) iomap.get("supplier"));
                         iomap.put("supplierInfo", supplierInfo);
