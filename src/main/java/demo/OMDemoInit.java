@@ -33,9 +33,10 @@ public class OMDemoInit {
     private static final String userId = "Administrator";
     private static String processId = "Order-Management.order-management";
     private static Random random = new Random(System.currentTimeMillis());
-    private static String deploymentId = "order-management_1.1-SNAPSHOT";
 
     public static void startProcesses(ProcessContext kcontext) {
+        String deploymentId = (String) kcontext.getKieRuntime().getEnvironment().get("deploymentId");
+
         ProcessService processService = (ProcessService) ServiceRegistry.get().service(ServiceRegistry.PROCESS_SERVICE);
 
         InputStream res = OMDemoInit.class.getClassLoader().getResourceAsStream("demo/order-info-list.xml");
