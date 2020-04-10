@@ -2,7 +2,6 @@ package script;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +25,6 @@ public class OrderManagementScript {
     public static void prepareOfferExit(ProcessContext kcontext) {
         SupplierInfo supplierInfoOut = (SupplierInfo) kcontext.getVariable("supplierInfoOut");
         supplierInfoOut.setUser((String) kcontext.getVariable("supplier"));
-        supplierInfoOut.setDeliveryDate(new Date());
         kcontext.setVariable("supplierInfoOut", supplierInfoOut);
         System.out.println("prepareOfferExit: " + supplierInfoOut);
     }
