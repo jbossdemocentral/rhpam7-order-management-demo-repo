@@ -110,6 +110,7 @@ Change Log
 
 - Version 7.7 (PAM version 7.7):
 
+   - test scenarios
    - process clean up
    - improved demo launcher 
    - version update

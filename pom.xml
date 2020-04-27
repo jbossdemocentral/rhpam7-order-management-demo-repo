@@ -56,6 +56,11 @@
       <artifactId>kie-dmn-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-feel</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <!--for debuging-->
     <dependency>
       <groupId>org.kie.server</groupId>
@@ -66,6 +71,32 @@
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-human-task-core</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <!-- test scenarios -->
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-scenario-simulation-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-scenario-simulation-backend</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-compiler</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-workbench-models-guided-dtable</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-dmn-core</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
@@ -89,7 +120,7 @@
       </plugin>
     </plugins>
   </build>
-  
+  <!-- repositories -->
   <repositories>
     <repository>
       <releases>
