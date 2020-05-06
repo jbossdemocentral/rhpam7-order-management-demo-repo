@@ -21,7 +21,7 @@ Any organization has a procurement process similar to this one:
 
 In the following picture the BPMN process design:
 
-![BPMN diagram](src/main/resources/com/example/OrderManagement-svg.svg)
+![BPMN diagram](src/main/resources/com/example/Order-Management.order-management-svg.svg)
 
 How to deploy this demo project
 -----------------------------------
@@ -92,6 +92,10 @@ Follow this steps to import the dashboard:
 From the menu select `Order Reports` to show a set of chart like in the following screen shot:
 
 ![Order Reports](docs/order-report.png)
+
+Another interesting approach to process monitoring is to leverage the elastic search technology:
+
+[Monitor business metrics with Red Hat Process Automation Manager, Elasticsearch, and Kibana](https://developers.redhat.com/blog/2020/05/04/monitor-business-metrics-with-red-hat-process-automation-manager-elasticsearch-and-kibana/)
 
 Task Assignment
 -----------------------------------
