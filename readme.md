@@ -17,11 +17,27 @@ Any organization has a procurement process similar to this one:
   - the cheapest offer is selected
   - the offer can be automatically accepted whether a set of *Business Rules* are met (implemented by a DMN decision `Auto Approve Decision`)
   - whether the offer does not satisfy the Business Rules, a manager is involved for the final decision (`Approve` task)
-  - finally the order is finalized sending it to the ERP system (`Place Order in ERP` task) or is rejected and passed back to the purchase department for acknowledgement (`Order Rejected` task)
+  - finally the order is finalized calling the sub-process `Place Order in ERP` or is rejected and passed back to the purchase department for acknowledgement (`Order Rejected` task)
 
 In the following picture the BPMN process design:
 
 ![BPMN diagram](src/main/resources/com/example/Order-Management.order-management-svg.svg)
+
+Place Order in ERP sub-process
+-----------------------------------
+
+This sub-process aims to simulate an asynchronous integration with an external system and to demonstrate the compensation capabilities of the process engine:
+
+- the first task send an email to alert that the order is sent to the ERP system
+- the task `Place Order in ERP` send the order to the ERP using an asynchronous messaging system (e.g. Kafka, JMS, MQTT, etc.)
+- the event gateway have to possible exit condition:
+
+  - timer event: if no other event arrives in 30 seconds complete the process with a **compensation**.
+  - signal event: it waits for a confirmation message from the ERP system that the order is correctly processed, the signal name is by convention `erp-<process instance id>`.
+
+- the task `compensation email` is executed if the time out event is fired and the compensation is raised.  
+
+![BPMN diagram](src/main/resources/com/example/Order-Management.erp-integration-svg.svg)
 
 How to deploy this demo project
 -----------------------------------
@@ -71,7 +87,7 @@ Run the demo process
 
 6. If the manager rejects the order, the purchase expert receives the *Order Reject* task to acknowledge the order rejection reason.
 
-7. The process happy path completes approving the order, the final step is an integration task that send the order information to the **ERP system** in order to finalize the order.
+7. The *process happy path* completes approving the order and send the order information to the **ERP system** to finalize the order.
 
 ### Before the demo
 
@@ -119,6 +135,7 @@ Change Log
    - improved demo launcher 
    - version update
    - documentation includes the configuration tweak to manage the correct form rendering 
+   - ERP integration sub-process to show the compensation capability
 
 - Version 7.6 (PAM version 7.6):
 
@@ -144,8 +161,5 @@ Change Log
 TODO
 -----------------------------------
 
-- SLA
 - documents
-- signal
-- compensation
 - error handling
