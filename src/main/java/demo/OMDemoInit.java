@@ -77,7 +77,7 @@ public class OMDemoInit {
 
                     Map<String, Object> inputParams = userTaskService.getTaskInputContentByTaskId(taskId);
                     OrderInfo orderInfo = (OrderInfo) inputParams.get("orderInfo");
-                    orderInfo.setTargetPrice(60 * random.nextInt(10));
+                    orderInfo.setTargetPrice(60 * random.nextInt(10) + 110);
                     orderInfo.setCategory(random.nextBoolean() ? "basic" : "optional");
                     List<String> suppliers;
                     if (random.nextInt(1) == 0)
