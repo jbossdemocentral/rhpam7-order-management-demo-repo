@@ -7,8 +7,8 @@
   <name>Order-Management</name>
   <description></description>
   <properties>
-    <ba.version>7.8.0.redhat-00002</ba.version>
-    <version.org.kie>7.39.0.Final-redhat-00005</version.org.kie>
+    <ba.version>7.8.1.redhat-00002</ba.version>
+    <version.org.kie>7.39.0.Final-redhat-00007</version.org.kie>
     <version.com.thoughtworks.xstream>1.4.11.1-redhat-00001</version.com.thoughtworks.xstream>
   </properties>
   <dependencyManagement>
