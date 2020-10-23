@@ -2,6 +2,8 @@ package com.example;
 
 import javax.persistence.ElementCollection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.drools.persistence.jpa.marshaller.VariableEntity;
 import org.kie.dmn.feel.lang.FEELProperty;
 import org.kie.dmn.feel.lang.FEELType;
@@ -34,6 +36,7 @@ public class OrderInfo extends VariableEntity {
 	@org.kie.api.definition.type.Description("suppliers list to involve")
 	@org.kie.api.definition.type.Label("suppliers list")
 	@ElementCollection
+	@JsonIgnore
 	private java.util.List<java.lang.String> suppliersList;
 	@org.kie.api.definition.type.Label("target price")
 	private double targetPrice;
