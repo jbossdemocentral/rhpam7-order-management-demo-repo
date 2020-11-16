@@ -128,6 +128,9 @@ If in your environment, you have multiple users and roles you can change the ass
 Change Log
 -----------------------------------
 
+- Version 7.9 (PAM version 7.9):
+   - timer reduced to 2 minutes
+
 - Version 7.7 (PAM version 7.7):
 
    - test scenarios
