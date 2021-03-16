@@ -27,6 +27,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 
+/**
+ * Temporary workaround to address the limitations of https://issues.redhat.com/browse/JBPM-9454
+ */
 @MappedSuperclass
 public abstract class VariableEntity implements Serializable {
 
