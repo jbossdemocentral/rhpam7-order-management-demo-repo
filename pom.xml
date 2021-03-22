@@ -7,7 +7,7 @@
   <name>Order-Management</name>
   <description></description>
   <properties>
-    <version.com.thoughtworks.xstream>1.4.13-java7</version.com.thoughtworks.xstream>
+    <version.com.thoughtworks.xstream>1.4.16</version.com.thoughtworks.xstream>
     <ba.version>7.9.1.redhat-00003</ba.version>
     <version.org.kie>7.44.0.Final-redhat-00006</version.org.kie>
     <maven.compiler.target>11</maven.compiler.target>
