@@ -1,8 +1,8 @@
-Red Had Process Automation Manager - Order Management Demo Repository
+Red Hat Process Automation Manager - Order Management Demo Repository
 =====================================================================
 
 
-**Red Had Process Automation Manager** is the Business Process Management product from Red Hat, based on the open source project [jBPM](http://www.jbpm.org).
+**Red Hat Process Automation Manager** is the Business Process Management product from Red Hat, based on the open source project [jBPM](http://www.jbpm.org).
 
 This demo aims to show some of the core capabilities of this powerful product.
 
