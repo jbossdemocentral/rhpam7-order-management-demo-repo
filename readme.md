@@ -56,6 +56,20 @@ Import the This repository can be imported in your Business Central following th
 <property name="org.kie.server.xstream.enabled.packages" value="org.drools.persistence.jpa.marshaller.*"/>
 ```
 
+If RHPAM is installed via OpenShift Operator, it's possible to add this property in the `KieApp` yaml file: 
+
+```yaml
+spec:
+  environment: rhpam-trial
+  objects:
+    console:
+      jvm:
+        javaOptsAppend: -Dorg.kie.server.xstream.enabled.packages=org.drools.persistence.jpa.marshaller.*
+    servers:
+      - jvm:
+          javaOptsAppend: -Dorg.kie.server.xstream.enabled.packages=org.drools.persistence.jpa.marshaller.*
+```
+
 Run the demo process
 -----------------------------------
 
