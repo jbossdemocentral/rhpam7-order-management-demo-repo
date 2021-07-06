@@ -119,61 +119,65 @@ Follow this steps to import the dashboard:
 3. In the `Import` pane select the file `dashboard/order-management-dashbuilder.zip` in the current project
 4. **Click** the `Import` button
 
-From the menu select `Order Reports` to show a set of chart like in the following screen shot:
+In the **Track** section of the top **Menu**, there are two new pages available:
 
-![Order Reports](docs/order-report.png)
+1. **Order Reports** shows a set of charts displaying some _Key Performance Indicators_ of the process like in the following screen shot:
 
-Another interesting approach to process monitoring is to leverage the elastic search technology:
+   ![Order Reports](docs/order-report.png)
+
+2. **Heatmap** shows the process diagram, where the tasks are blanket with a cloud which color intensity highlights how often the task is triggered. This is a precious visualization technique for the Business Analyst who can easily spot which area of the process is more stressed.
+
+   ![Heatmap](docs/heatmap.png)   
+
+It is worth mentioning that RHPAM offers many extensions point, so it can be observed in a multiplicity of ways. For example, it can leverage the **elastic search** technology, as detailed in the following article:
 
 [Monitor business metrics with Red Hat Process Automation Manager, Elasticsearch, and Kibana](https://developers.redhat.com/blog/2020/05/04/monitor-business-metrics-with-red-hat-process-automation-manager-elasticsearch-and-kibana/)
 
 Task Assignment
 -----------------------------------
 
-All the task are assigned to the group `rest-all` in order to easily deploy the demo in OpenShift Container Platform.
+All the task are assigned to the group `kie-server` in order to easily deploy the demo in OpenShift Container Platform.
 If in your environment, you have multiple users and roles you can change the assignment accordingly.
 
-- Task: **Request Offer** - User Group: `rest-all`
-- Task: **Prepare Offer** - User Group: `rest-all`, this task is supposed to be assigned dynamically to the suppliers selected at previous task (*Request Offer*). If in your environment you can define these users: supplier1, supplier2, supplier3, then you can remove the group and assign the actor to `#{supplier}`
-- Task: **Approve** - User Group: `rest-all`
-- Task: **OrderRejected** - User Group: `rest-all` 
+- Task: **Request Offer** - User Group: `kie-server`
+- Task: **Prepare Offer** - User Group: `kie-server`, this task is supposed to be assigned dynamically to the suppliers selected at previous task (*Request Offer*). If in your environment you can define these users: supplier1, supplier2, supplier3, then you can remove the group and assign the actor to `#{supplier}`
+- Task: **Approve** - User Group: `kie-server`
+- Task: **OrderRejected** - User Group: `kie-server` 
 
 
 Change Log
 -----------------------------------
 
+- Version 7.11 (RHPAM v7.11)
+  - Heatmap
+
 - Version 7.9 (PAM version 7.9):
-   - timer reduced to 2 minutes
+  - timer reduced to 2 minutes
 
 - Version 7.7 (PAM version 7.7):
-
-   - test scenarios
-   - process clean up
-   - improved demo launcher 
-   - version update
-   - documentation includes the configuration tweak to manage the correct form rendering 
-   - ERP integration sub-process to show the compensation capability
+  - test scenarios
+  - process clean up
+  - improved demo launcher 
+  - version update
+  - documentation includes the configuration tweak to manage the correct form rendering 
+  - ERP integration sub-process to show the compensation capability
 
 - Version 7.6 (PAM version 7.6):
-
-   - Dashboard
-   - Fixes to **OM-demo-init**
-   - Fixes to variable persistence logic
+  - Dashboard
+  - Fixes to **OM-demo-init**
+  - Fixes to variable persistence logic
 
 - Version 7.4 (PAM version 7.4): 
-
-    - Version 7.4.1 update, task normalization, version update and documentation
-    - Version 7.4 update
+  - Version 7.4.1 update, task normalization, version update and documentation
+  - Version 7.4 update
 
 - Version 7.3 (PAM version 7.3):
-
-    - Version 7.3 multiple suppliers in parallel, DMN decision, demo initialization process
+  - Version 7.3 multiple suppliers in parallel, DMN decision, demo initialization process
 
 - Version 7.0 (PAM version 7.0):
-
-    - 2019-03-15: process description with order item
-    - 2019-03-13: documentation improved
-    - 2019-01-29: changed user group to match existing one in OCP standard image.
+  - 2019-03-15: process description with order item
+  - 2019-03-13: documentation improved
+  - 2019-01-29: changed user group to match existing one in OCP standard image.
 
 TODO
 -----------------------------------
