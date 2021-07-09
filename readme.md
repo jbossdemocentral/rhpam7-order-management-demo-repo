@@ -56,18 +56,34 @@ Import the This repository can be imported in your Business Central following th
 <property name="org.kie.server.xstream.enabled.packages" value="org.drools.persistence.jpa.marshaller.*"/>
 ```
 
-If RHPAM is installed via OpenShift Operator, it's possible to add this property in the `KieApp` yaml file: 
+In order to configure the persistence make sure that the following property is set to an accessible datasource in the application server configuration. (OpenShift Operator sets it up autonomously) 
+
+```xml
+<property name="org.kie.server.persistence.ds" value="java:jboss/datasources/ExampleDS"/>
+```
+
+In order to deploy it in OpenShift, here the Operator configuration (`KieApp` yaml file): 
 
 ```yaml
 spec:
+  commonConfig:
+    adminPassword: changeme
   environment: rhpam-trial
   objects:
     console:
       jvm:
-        javaOptsAppend: -Dorg.kie.server.xstream.enabled.packages=org.drools.persistence.jpa.marshaller.*
+        javaOptsAppend: >-
+          -Dorg.kie.server.xstream.enabled.packages=org.drools.persistence.jpa.marshaller.*
+          -Ddashbuilder.kieserver.serverTemplate.default-kieserver.replace_query=true
+      replicas: 1
     servers:
-      - jvm:
-          javaOptsAppend: -Dorg.kie.server.xstream.enabled.packages=org.drools.persistence.jpa.marshaller.*
+      - database:
+          type: h2
+        id: default-kieserver
+        jvm:
+          javaOptsAppend: >-
+            -Dorg.kie.server.xstream.enabled.packages=org.drools.persistence.jpa.marshaller.*
+        replicas: 1
 ```
 
 Run the demo process
@@ -147,6 +163,9 @@ If in your environment, you have multiple users and roles you can change the ass
 
 Change Log
 -----------------------------------
+
+- Version 7.11.1
+  - Improved OpenShift deployment support
 
 - Version 7.11 (RHPAM v7.11)
   - Heatmap
