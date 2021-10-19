@@ -1,0 +1,37 @@
+# REST Client for Visual Studio Code
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+###
+# Start a process
+POST http://localhost:8080/kie-server/services/rest/server/containers/order-management_1.1-SNAPSHOT/processes/Order-Management.order-management/instances
+Authorization: Basic donato:donato
+Accept: application/json
+Content-Type: application/json
+
+{
+  "orderInfo" : {
+    "com.example.OrderInfo" : {
+        "item" : "BenQ BL2711U LED Monitor",
+        "category" : null,
+        "urgency" : "Low",
+        "price" : 0.0,
+        "managerApproval" : null,
+        "rejectionReason" : null,
+        "targetPrice" : 0.0,
+    }
+  }
+}
+
+### Query process instances 
+GET http://localhost:8080/kie-server/services/rest/server/queries/processes/instances?page=0&pageSize=10&sortOrder=true&status=2
+Authorization: Basic donato:donato
+Accept: application/json
+Content-Type: application/json
+
+### History delete
+POST http://localhost:8080/kie-server/services/history/clear
+Authorization: Basic donato:donato
+Accept: application/json
+Content-Type: application/json
+
+{}
