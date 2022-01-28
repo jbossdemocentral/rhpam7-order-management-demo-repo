@@ -40,9 +40,13 @@ public class OMDemoInit {
         ProcessService processService = (ProcessService) ServiceRegistry.get().service(ServiceRegistry.PROCESS_SERVICE);
 
         InputStream res = OMDemoInit.class.getClassLoader().getResourceAsStream("demo/order-info-list.xml");
-        XStream xStream = new XStream();
-        xStream.setClassLoader(OMDemoInit.class.getClassLoader());
-        Collection<OrderInfo> list = (Collection<OrderInfo>) xStream.fromXML(res);
+        XStream xstream = new XStream();
+        xstream.setClassLoader(OMDemoInit.class.getClassLoader());
+        xstream.allowTypesByWildcard(new String[] { 
+            "com.example.**"
+        });
+
+        Collection<OrderInfo> list = (Collection<OrderInfo>) xstream.fromXML(res);
 
         Map<String, Object> params = new HashMap<>();
         List<Long> processInstanceList = new ArrayList<>(list.size());
