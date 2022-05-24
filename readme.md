@@ -164,6 +164,9 @@ If in your environment, you have multiple users and roles you can change the ass
 Change Log
 -----------------------------------
 
+- Version 7.12.1
+  - Enhanced ERP Integration Process
+
 - Version 7.12
 
 - Version 7.11.1
