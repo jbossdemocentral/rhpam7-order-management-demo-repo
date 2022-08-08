@@ -1,15 +1,15 @@
 Process Automation Manager - Order Management Demo Repository
 =====================================================================
 
-On July 19th, IBM released [Business Automation Manager Open Editions 8.0](https://www.ibm.com/common/ssi/cgi-bin/ssialias?htmlfid=760/ENUSJL22-0058&infotype=AN&subtype=CA). 
+On July 19th, **IBM** released [IBM Business Automation Manager Open Editions 8.0](https://www.ibm.com/common/ssi/cgi-bin/ssialias?htmlfid=760/ENUSJL22-0058&infotype=AN&subtype=CA), which is the continuation of **Red Hat Process Automation Manager**.
 
-**Red Hat Process Automation Manager** moves in the **IBM** house and it will continue the Open Source commitment. 
+In fact, **IBM** will continue to the Open Source commitment working on the upstream projects [jBPM](https://www.jbpm.org) and [Drools](https://drools.org/), which are the foundation of their enterprise grade product **IBM Business Automation Manager Open Editions**.
 
-IBM will continue to work on the upstream projects [jBPM](https://www.jbpm.org) and [Drools](https://drools.org/), which are the foundation of their enterprise grade product **Business Automation Manager Open Editions 8.0**.
+**Red Hat Process Automation Manager version 7.13** is the last version released by **Red Hat** and is based on same open source libraries built of **IBM Business Automation Manager Open Editions version 8.0**: this makes the two products equivalent. In such way, Red Hat customers are able to smoothly move to the IBM release, because no changes will be required to their projects.
 
-**Red Hat Process Automation Manager version 7.13** is the last version released by **Red Hat** and is based on same build of open source libraries of **IBM Business Automation Manager Open Editions 8.0**: this makes the two products equivalent. In such way, Red Hat customers are able to smoothly move to the IBM release, because no changes will be required to their projects.
-
-See also the [IBM blog post](https://www.ibm.com/cloud/blog/announcements/ibm-expands-business-automation-portfolio-with-open-source-process-and-decision-automation).
+Further information:
+- [IBM blog post](https://www.ibm.com/cloud/blog/announcements/ibm-expands-business-automation-portfolio-with-open-source-process-and-decision-automation).
+- [IBM Business Automation Manager Open Editions documentation](https://www.ibm.com/docs/en/ibamoe?topic=getting-started-business-automation-manager-open-editions)
 
 This demo aims to show some of the core capabilities of those powerful products.
 
@@ -37,7 +37,7 @@ Even if this demo is focused on the process logic, the decision logic is a good 
 
 [Order Approval](src/main/resources/com/example/order_management/order-approval.dmn) takes `Order Information` as input and decides whether or not to approve it.
 
-Opening the DMN analyze the logic starting from _Decision Requirement Diagram_:
+Open the DMN and analyze the logic starting from _Decision Requirement Diagram_:
 
 - The `Approve` _decision_ node return `true` if the price is less than the target price multiplied by the price tolerance coefficient.
 - The `Price tolerance` is a _Business Knowledge Model_ which compute the price tolerance coefficient using a **decision table**.
