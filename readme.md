@@ -10,6 +10,7 @@ In fact, **IBM** will continue to the Open Source commitment working on the upst
 Further information:
 - [IBM blog post](https://www.ibm.com/cloud/blog/announcements/ibm-expands-business-automation-portfolio-with-open-source-process-and-decision-automation).
 - [IBM Business Automation Manager Open Editions documentation](https://www.ibm.com/docs/en/ibamoe?topic=getting-started-business-automation-manager-open-editions)
+- [KIE Community welcomes IBM Business Automation](https://blog.kie.org/2022/07/ibm-rht.html)
 
 This demo aims to show some of the core capabilities of those powerful products.
 
@@ -37,7 +38,7 @@ Even if this demo is focused on the process logic, the decision logic is a good 
 
 [Order Approval](src/main/resources/com/example/order_management/order-approval.dmn) takes `Order Information` as input and decides whether or not to approve it.
 
-Open the DMN and analyze the logic starting from _Decision Requirement Diagram_:
+Open the DMN and analyse the logic starting from _Decision Requirement Diagram_:
 
 - The `Approve` _decision_ node return `true` if the price is less than the target price multiplied by the price tolerance coefficient.
 - The `Price tolerance` is a _Business Knowledge Model_ which compute the price tolerance coefficient using a **decision table**.
