@@ -1,10 +1,17 @@
-Red Hat Process Automation Manager - Order Management Demo Repository
+Process Automation Manager - Order Management Demo Repository
 =====================================================================
 
+On July 19th, IBM released [Business Automation Manager Open Editions 8.0](https://www.ibm.com/common/ssi/cgi-bin/ssialias?htmlfid=760/ENUSJL22-0058&infotype=AN&subtype=CA). 
 
-**Red Hat Process Automation Manager** is the Business Process Management product from Red Hat, based on the open source project [jBPM](http://www.jbpm.org).
+**Red Hat Process Automation Manager** moves in the **IBM** house and it will continue the Open Source commitment. 
 
-This demo aims to show some of the core capabilities of this powerful product.
+IBM will continue to work on the upstream projects [jBPM](https://www.jbpm.org) and [Drools](https://drools.org/), which are the foundation of their enterprise grade product **Business Automation Manager Open Editions 8.0**.
+
+**Red Hat Process Automation Manager version 7.13** is the last version released by **Red Hat** and is based on same build of open source libraries of **IBM Business Automation Manager Open Editions 8.0**: this makes the two products equivalent. In such way, Red Hat customers are able to smoothly move to the IBM release, because no changes will be required to their projects.
+
+See also the [IBM blog post](https://www.ibm.com/cloud/blog/announcements/ibm-expands-business-automation-portfolio-with-open-source-process-and-decision-automation).
+
+This demo aims to show some of the core capabilities of those powerful products.
 
 Order Management Process
 -----------------------------------
@@ -19,9 +26,26 @@ Any organization has a procurement process similar to this one:
   - whether the offer does not satisfy the Business Rules, a manager is involved for the final decision (`Approve` task)
   - finally the order is finalized calling the sub-process `Place Order in ERP` or is rejected and passed back to the purchase department for acknowledgement (`Order Rejected` task)
 
-In the following picture the BPMN process design:
+In the following picture the **BPMN** process design:
 
 ![BPMN diagram](src/main/resources/com/example/Order-Management.order-management-svg.svg)
+
+Auto Approve Decision
+-----------------------------------
+
+Even if this demo is focused on the process logic, the decision logic is a good example of **DMN** design.
+
+[Order Approval](src/main/resources/com/example/order_management/order-approval.dmn) takes `Order Information` as input and decides whether or not to approve it.
+
+Opening the DMN analyze the logic starting from _Decision Requirement Diagram_:
+
+- The `Approve` _decision_ node return `true` if the price is less than the target price multiplied by the price tolerance coefficient.
+- The `Price tolerance` is a _Business Knowledge Model_ which compute the price tolerance coefficient using a **decision table**.
+
+For further information about DMN: 
+
+- [Learn DMN in 15 minutes](https://learn-dmn-in-15-minutes.com/)
+- [DMN FEEL handbook](https://kiegroup.github.io/dmn-feel-handbook/#dmn-feel-handbook)
 
 Place Order in ERP sub-process
 -----------------------------------
